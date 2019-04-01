@@ -1,205 +1,107 @@
-# NLP-SkipGramProject{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf400
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+README SKIP GRAM PROJECT 
 
-\f0\fs36 \cf0 README SKIP GRAM PROJECT \
+	Project Description
 
-\fs24 \
-	
-\b\fs28 Project Description
-\b0\fs24 \
-\
-The skipgram project aims at programming an algorithm in Python to determine for any given word its embedding and to assess its degree of similarity with another given word. At the end of the exercise our class may return for a given word of a given corpus the N-closest ones. This file is a detailed descritpion of the creation process for the algorithm.  \
-\
-	
-\b\fs28 Libraries used
-\b0\fs24  \
-\
+The skipgram project aims at programming an algorithm in Python to determine for any given word its embedding and to assess its degree of similarity with another given word. At the end of the exercise our class may return for a given word of a given corpus the N-closest ones. This file is a detailed descritpion of the creation process for the algorithm.  
 
-\b For basic manipulation:\
+	Libraries used 
 
-\b0 -numpy  \
--pandas  \
--argparse   \
--pickle  \
+For basic manipulation:
+-numpy  
+-pandas  
+-argparse   
+-pickle  
+For tokenisation process:
+-nltk  
+-future
 
-\b For tokenisation process:\
+	Tokenisation of the data 
 
-\b0 -nltk  \
--future\
-\
-	
-\b\fs28 Tokenisation of the data
-\b0\fs24  \
-\
-Definition of text2sentences function:
-\i  in order to separte the sentence, the words of the corpus, remove the ponctuation elements et stock them into a list.
-\i0 \
-\
-Definition of stopnumber function: 
-\i to remove the digit elements of the list.
-\i0 \
-\
-Definition of dictionnaryoffrequency function: 
-\i to create a dictionary in which the key is the word of the corpus and the value is its frequency. This function will be used to remove the words that appear too many times.
-\i0 \
-\
-Definition of stoprecword function: 
-\i to remove the word for which the frequency is above N% of the total number of words in the corpus. Use of dictionnaryoffrequency function. 
-\i0 \
-\
+Definition of text2sentences function: in order to separte the sentence, the words of the corpus, remove the ponctuation elements et stock them into a list.
 
-\b Parameters:   \
+Definition of stopnumber function: to remove the digit elements of the list.
 
-\b0 Percentage to remove word: 0.02\
-\
-	
-\b\fs28 Generate the pairs
-\b0\fs24 \
-\
+Definition of dictionnaryoffrequency function: to create a dictionary in which the key is the word of the corpus and the value is its frequency. This function will be used to remove the words that appear too many times.
 
-\b\fs26 Generate the negative pairs\
+Definition of stoprecword function: to remove the word for which the frequency is above N% of the total number of words in the corpus. Use of dictionnaryoffrequency function. 
 
-\b0\fs24 \
-Definition of init function: 
-\i to initialize the class.
-\i0 \
-\
-Definition of wordlistweigthed function: t
-\i o extract and store the values of our dictionnary which are the frequency of the word. Use for our function probalist. \
+Parameters:   
+Percentage to remove word: 0.02
 
-\i0 \
-Definition of wordlist function: 
-\i to extract and store the keys of our dictionnary which are the words of our corpus. Use for our function probalist. \
+	Generate the pairs
 
-\i0 \
-Definition of sumwordfreqweighted function: 
-\i to compute  Incremental Skip-gram Model with Negative Sampling rate. \
+Generate the negative pairs
 
-\i0 \
-Definition of proba_list function: 
-\i to create a list with the Incremental Skip-gram Model with Negative Sampling rate for each word.\
-\
+Definition of init function: to initialize the class.
 
-\i0\b\fs26 Generate the positive and negative pairs\
+Definition of wordlistweigthed function: to extract and store the values of our dictionnary which are the frequency of the word. Use for our function probalist. 
 
-\b0\fs24 \
-Definition of positive_and_negative function: 
-\i to create our list of pairs; for each positive pair it generates N negative pairs.
-\i0 \
-\
+Definition of wordlist function: to extract and store the keys of our dictionnary which are the words of our corpus. Use for our function probalist. 
 
-\b parameters:
-\b0 \
-negative rate: 5  \
+Definition of sumwordfreqweighted function: to compute  Incremental Skip-gram Model with Negative Sampling rate. 
+
+Definition of proba_list function: to create a list with the Incremental Skip-gram Model with Negative Sampling rate for each word.
+
+Generate the positive and negative pairs
+
+Definition of positive_and_negative function: to create our list of pairs; for each positive pair it generates N negative pairs.
+
+parameters:
+negative rate: 5  
 WinSize: 2
-\i \
 
-\i0 \
+	Optimization Algorithm 
 
-\b\fs28 	Optimization Algorithm \
+Definition of dico_vectors function: to create an embedding (random vector of size N) for each word. Multiply with 1e-3 to get values small enough for the optimization.
 
-\b0\fs24 \
-Definition of dico_vectors function: 
-\i to create an embedding (random vector of size N) for each word. Multiply with 1e-3 to get values small enough for the optimization.
-\i0 \
-\
-Definition of sigmoid function: 
-\i to create the function that compute the sigmoid between two embeddings. Use for the computation of the gradients.
-\i0 \
-\
-Definition of gradientpostar function: 
-\i to compute the gradient for the target vector update when matched with positive pairs.
-\i0 \
-\
-Definition of gradientnegtar function:
-\i  to compute the gradient for the target vector update when matched with negative pairs.
-\i0 \
-\
-Definition of gradientposcon function:
-\i  to compute the gradient for the context word vector update.
-\i0 \
-\
-Definition of gradientnegaid function:
-\i  to compute the gradient for the negative associated word vector update.
-\i0 \
-\
-Definition of dotmat function: 
-\i to actualise the vectors at each iterations. For each pair both vectors are updated. 
-\i0 \
-\
-\
+Definition of sigmoid function: to create the function that compute the sigmoid between two embeddings. Use for the computation of the gradients.
 
-\b Paramaters:
-\b0 \
-Size of the Vector: 100  \
-Step for the gradient: 0.01 to get reasonable embeddings after the optimisation. \
-negativerates: 5  \
-Number of epochs: 1, get satisfying results with only one epoch.\
-\
+Definition of gradientpostar function: to compute the gradient for the target vector update when matched with positive pairs.
 
-\b\fs28 	Assess the similarity \
+Definition of gradientnegtar function: to compute the gradient for the target vector update when matched with negative pairs.
 
-\b0\fs24 \
-Definition of score_similarity function: 
-\i to compute the similarity between two word , the larger the output the more similar the 2 word are.
-\i0 \
-\
-Definition of most_similar function: to find the N most common word of a word.\
-\
+Definition of gradientposcon function: to compute the gradient for the context word vector update.
 
-\b Parameters:  \
+Definition of gradientnegaid function: to compute the gradient for the negative associated word vector update.
 
-\b0 Most common words: 5 \
-\
-	
-\b\fs28 External References
-\b0\fs24 \
-\
+Definition of dotmat function: to actualise the vectors at each iterations. For each pair both vectors are updated. 
 
-\b word2vec Explained Deriving Mikolov et al.\'92s Negative-Sampling Word-Embedding Method
-\b0  - 
-\i Yoav Goldberg and Omer Levy\
 
-\i0 \
+Paramaters:
+Size of the Vector: 100  
+Step for the gradient: 0.01 to get reasonable embeddings after the optimisation. 
+negativerates: 5  
+Number of epochs: 1, get satisfying results with only one epoch.
 
-\b Speech and Language, Processing vector semantics part II
-\b0  - 
-\i Dan Jurafsky and James Martin
-\i0   \
-\
+	Assess the similarity 
 
-\b Word to Vectors\uc0\u8202 \'97\u8202 Natural Language Processing
-\b0  - 
-\i Shubham Agarwal
-\i0 \
-\
+Definition of score_similarity function: to compute the similarity between two word , the larger the output the more similar the 2 word are.
 
-\b Distributed Representations of Words and Phrases and their Compositionality - 
-\i\b0 Jeffrey Dean, Tomas Mikolov_  
-\i0 \
-\
+Definition of most_similar function: to find the N most common word of a word.
 
-\b Word2Vec Tutorial Part I: The SkipGram Model
-\b0  - 
-\i Alex Minnaar 
-\i0 \
-\
+Parameters:  
+Most common words: 5 
 
-\b Text Data: Word Embedding
-\b0  
-\i -Yizhou Sun UCLA CS\
-\
-ATTYASSE Flora  \
-BENICHOU Vadim  \
-MICCICHE Carmelo  \
-VIAL Jennifer \
+	External References
+
+word2vec Explained Deriving Mikolov et al.’s Negative-Sampling Word-Embedding Method - Yoav Goldberg and Omer Levy
+
+Speech and Language, Processing vector semantics part II - Dan Jurafsky and James Martin  
+
+Word to Vectors — Natural Language Processing - Shubham Agarwal
+
+Distributed Representations of Words and Phrases and their Compositionality - Jeffrey Dean, Tomas Mikolov_  
+
+Word2Vec Tutorial Part I: The SkipGram Model - Alex Minnaar 
+
+Text Data: Word Embedding -Yizhou Sun UCLA CS
+
+ATTYASSE Flora  
+BENICHOU Vadim  
+MICCICHE Carmelo  
+VIAL Jennifer 
  
-\i0 \
-\
-\
-\
-}
+
+
+
+
